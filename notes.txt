@@ -1,3 +1,4 @@
 post standup work
 post standup work
 Test: commit with NO ticket id — should stay UNMATCHED. If a commit has no task/ticket key (like JRVIS20-10) in its message or branch, the matcher must NOT link it to any ticket.
+Test JRVIS20-12: commit with ticket key should link to JRVIS20-12
