@@ -9,6 +9,14 @@ Built for the **Multi-App AI Agent Hackathon** by **Rohith Penninti** & **Shrava
 
 ---
 
+## ▶️ Demo & presentation (start here)
+
+- **🎬 Watch the demo video:** https://drive.google.com/drive/folders/1Hhy6s_ScVtAyhebdWioe6N-gGhJBD160?usp=sharing
+- **📊 Slides:** `presentation/index.html` (open in a browser — arrow keys to navigate)
+- **📑 PowerPoint:** `presentation/Sprint_Copilot.pptx`
+
+---
+
 ## 🔌 External apps & APIs we integrated
 
 Sprint Copilot is a **multi-app agent** — it reads from and writes to four
@@ -128,6 +136,6 @@ GitHub / Jira / Slack / Azure credentials in `.env`.
 
 **Stack:** Python · Flask · GitHub / Jira / Slack REST APIs · Azure OpenAI.
 
-## Presentation
-- `presentation/index.html` — slide deck (open in a browser; arrow keys to navigate)
-- `presentation/Sprint_Copilot.pptx` — PowerPoint version
+---
+
+*Demo video, slides, and PowerPoint are linked at the top ↑*
