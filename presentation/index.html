@@ -80,7 +80,7 @@
     <div class="tag">The scrum master, <span class="accent">automated.</span></div>
     <p class="lead">An agent that watches your team's GitHub &amp; Jira, moves tickets when work merges, flags what's stuck, and writes the daily standup into Slack — so nobody does the busywork.</p>
     <div class="row" style="margin-top:6px"><span class="chip">GitHub</span><span class="chip">Jira</span><span class="chip">Slack</span><span class="chip">Azure OpenAI</span></div>
-    <div class="team" style="margin-top:14px"><span><b>Rohith Penninti</b></span><span><b>Shravani Joshi</b></span><span class="meta">penninti/worklog-ai</span></div>
+    <div class="team" style="margin-top:14px"><span><b>Rohith Penninti</b></span><span><b>Shravani Joshi</b></span><span class="meta">penninti/sprint-copilot</span></div>
   </section>
   <section class="slide">
     <div class="eyebrow">The problem</div>
@@ -105,7 +105,7 @@
       <div class="step">Act<small>move + comment</small></div><span class="arrow">→</span>
       <div class="step">Write<small>AI standup</small></div><span class="arrow">→</span>
       <div class="step">Post<small>to Slack</small></div></div>
-    <p class="lead" style="margin-top:14px">Every step is a <span class="accent">real change in the tools you already use</span>. Developers tag a commit with the ticket key (<span class="mono accent">SCRUM-8</span>); the agent does the rest.</p>
+    <p class="lead" style="margin-top:14px">Every step is a <span class="accent">real change in the tools you already use</span>. Developers tag a commit with the ticket key (<span class="mono accent">SCRUM-8</span>); the agent does the rest — automatically across <span class="accent">every Jira project</span>, so new boards just show up.</p>
   </section>
   <section class="slide">
     <div class="eyebrow">It acts — not reports</div>
@@ -113,7 +113,7 @@
     <div class="card" style="max-width:680px; margin-top:6px">
       <div class="card-head"><span class="mono accent">SCRUM-8</span><span class="ttl">Read Jira — fetch sprint tickets</span><span class="pill done" style="margin-left:auto">● Done</span></div>
       <div class="meta">assignee: Rohith Reddy</div>
-      <div class="comment"><span class="u">Sprint Copilot</span> · just now<br>✅ moved to <span class="g">Done</span>.<br>• PR #4: SCRUM-8 read jira — fetch sprint tickets<br>• commit <span class="lnk">03ca272f</span> → <span class="lnk">github.com/penninti/worklog-ai/commit/03ca272f</span></div>
+      <div class="comment"><span class="u">Sprint Copilot</span> · just now<br>✅ moved to <span class="g">Done</span>.<br>• PR #4: SCRUM-8 read jira — fetch sprint tickets<br>• commit <span class="lnk">03ca272f</span> → <span class="lnk">github.com/penninti/sprint-copilot/commit/03ca272f</span></div>
     </div>
     <p class="lead" style="margin-top:6px">No one opened Jira. No one dragged a card. The merge triggered it, and it left the commit link as evidence.</p>
   </section>
@@ -145,7 +145,7 @@
     <h2>Small, sharp pieces.</h2>
     <div class="modlist">
       <div class="mod"><code>github.py</code><span>reads commits &amp; PRs across all branches</span></div>
-      <div class="mod"><code>jira.py</code><span>reads tickets · moves them · comments</span></div>
+      <div class="mod"><code>jira.py</code><span>reads all projects · moves tickets · comments</span></div>
       <div class="mod"><code>match.py</code><span>links commit ↔ ticket by key</span></div>
       <div class="mod"><code>stuck.py</code><span>flags stalled work</span></div>
       <div class="mod"><code>standup.py</code><span>writes the standup — Azure OpenAI</span></div>
