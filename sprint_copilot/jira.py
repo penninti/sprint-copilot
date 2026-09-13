@@ -30,6 +30,19 @@ def _project() -> str:
     return os.environ.get("JIRA_PROJECT", "SCRUM")
 
 
+def all_project_keys() -> list[str]:
+    """Every project the account can see — so a newly-added project shows up
+    with no config change (set JIRA_PROJECT=ALL to use this)."""
+    base, email, token = _cfg()
+    r = requests.get(
+        f"{base}/rest/api/3/project/search",
+        auth=(email, token), headers={"Accept": "application/json"},
+        params={"maxResults": 50}, timeout=15,
+    )
+    r.raise_for_status()
+    return [p["key"] for p in r.json().get("values", [])]
+
+
 def _normalise(issue: dict, base: str) -> dict:
     f = issue.get("fields", {}) or {}
     assignee = f.get("assignee") or {}
@@ -47,7 +60,16 @@ def _normalise(issue: dict, base: str) -> dict:
 def fetch_tickets(project: str | None = None, jql: str | None = None, max_results: int = 50) -> list[dict]:
     base, email, token = _cfg()
     project = project or _project()
-    jql = jql or f"project = {project} ORDER BY updated DESC"
+    if jql is None:
+        # JIRA_PROJECT=ALL (or *) → every project the account can see, so a
+        # newly-added project appears automatically. Otherwise it's a
+        # comma-separated list of specific project keys.
+        if project.strip().upper() in ("ALL", "*", ""):
+            keys = all_project_keys()
+        else:
+            keys = [k.strip() for k in project.split(",") if k.strip()]
+        scope = f"project = {keys[0]}" if len(keys) == 1 else f"project in ({', '.join(keys)})"
+        jql = f"{scope} ORDER BY updated DESC"
     auth = (email, token)
     headers = {"Accept": "application/json", "Content-Type": "application/json"}
 
