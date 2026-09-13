@@ -47,7 +47,12 @@ def _normalise(issue: dict, base: str) -> dict:
 def fetch_tickets(project: str | None = None, jql: str | None = None, max_results: int = 50) -> list[dict]:
     base, email, token = _cfg()
     project = project or _project()
-    jql = jql or f"project = {project} ORDER BY updated DESC"
+    if jql is None:
+        # JIRA_PROJECT may list several projects, comma-separated, so tasks
+        # across multiple workspaces/boards all show up.
+        keys = [k.strip() for k in project.split(",") if k.strip()]
+        scope = f"project = {keys[0]}" if len(keys) == 1 else f"project in ({', '.join(keys)})"
+        jql = f"{scope} ORDER BY updated DESC"
     auth = (email, token)
     headers = {"Accept": "application/json", "Content-Type": "application/json"}
 
