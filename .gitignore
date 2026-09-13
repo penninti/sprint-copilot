@@ -1,0 +1,14 @@
+# secrets — never commit
+.env
+
+# runtime state
+sprint_copilot/manual_links.json
+
+# python
+__pycache__/
+*.py[cod]
+venv/
+.venv/
+
+# macOS
+.DS_Store

@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sprint Copilot — Pitch</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+  :root{
+    --ink:#0a0e14; --panel:#151d2a; --line:#26313f; --text:#d8e0ec; --muted:#8695a8; --dim:#5f6d80;
+    --accent:#5b8cff; --done:#34d399; --stuck:#f5a524;
+    --mono:'IBM Plex Mono',ui-monospace,monospace; --body:'IBM Plex Sans',system-ui,sans-serif; --disp:'Sora','IBM Plex Sans',system-ui,sans-serif;
+  }
+  *{box-sizing:border-box} html,body{height:100%}
+  body{margin:0; background:var(--ink); color:var(--text); font-family:var(--body);
+    background-image:radial-gradient(1200px 600px at 78% -8%, rgba(91,140,255,.10), transparent 60%),radial-gradient(900px 500px at 0% 110%, rgba(52,211,153,.06), transparent 55%);
+    -webkit-font-smoothing:antialiased;}
+  img{max-width:100%}
+  .deck{position:relative; height:100vh; width:100%; overflow:hidden}
+  .slide{position:absolute; inset:0; display:flex; flex-direction:column; justify-content:center; padding:clamp(24px,6vw,110px); gap:22px; max-width:1180px; margin:0 auto; opacity:0; visibility:hidden; transform:translateY(14px)}
+  .slide.active{opacity:1; visibility:visible; transform:none}
+  @media (prefers-reduced-motion:no-preference){ .slide{transition:opacity .45s ease, transform .45s ease} }
+  .eyebrow{font-family:var(--mono); font-size:12px; letter-spacing:.22em; text-transform:uppercase; color:var(--accent)}
+  h1{font-family:var(--disp); font-weight:800; font-size:clamp(44px,9vw,104px); line-height:.98; margin:0; letter-spacing:-.02em; text-wrap:balance}
+  h2{font-family:var(--disp); font-weight:700; font-size:clamp(30px,5.2vw,60px); line-height:1.04; margin:0; letter-spacing:-.015em; text-wrap:balance; max-width:16ch}
+  .lead{font-size:clamp(16px,2.1vw,22px); color:var(--muted); max-width:60ch; line-height:1.55}
+  .tag{font-family:var(--disp); font-weight:600; font-size:clamp(20px,3vw,32px); color:var(--text)}
+  .accent{color:var(--accent)} .g{color:var(--done)} .a{color:var(--stuck)} .mono{font-family:var(--mono)}
+  .row{display:flex; flex-wrap:wrap; gap:10px; align-items:center}
+  .chip{font-family:var(--mono); font-size:13px; color:var(--text); background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:7px 12px}
+  .meta{font-family:var(--mono); font-size:13px; color:var(--dim); letter-spacing:.04em}
+  .flow{display:flex; flex-wrap:wrap; align-items:center; gap:10px; margin-top:6px}
+  .step{background:var(--panel); border:1px solid var(--line); border-radius:10px; padding:12px 16px; font-weight:600; font-size:15px}
+  .step small{display:block; font-family:var(--mono); font-weight:400; font-size:11px; color:var(--muted); margin-top:3px; letter-spacing:.03em}
+  .arrow{color:var(--accent); font-size:18px}
+  .card{background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:20px 22px; box-shadow:0 18px 40px -24px rgba(0,0,0,.7)}
+  .card-head{display:flex; align-items:center; gap:10px; margin-bottom:12px}
+  .pill{font-family:var(--mono); font-size:11px; font-weight:500; padding:3px 10px; border-radius:20px; letter-spacing:.04em}
+  .pill.done{background:rgba(52,211,153,.14); color:var(--done); border:1px solid rgba(52,211,153,.35)}
+  .pill.todo{background:rgba(134,149,168,.14); color:var(--muted); border:1px solid var(--line)}
+  .pill.stuck{background:rgba(245,165,36,.14); color:var(--stuck); border:1px solid rgba(245,165,36,.4)}
+  .ttl{font-weight:600; font-size:17px}
+  .comment{border-left:2px solid var(--done); padding:10px 0 2px 14px; margin-top:12px; color:var(--muted); font-size:14px; line-height:1.7}
+  .comment .u{color:var(--text); font-weight:600} .comment .lnk{font-family:var(--mono); font-size:12.5px; color:var(--accent)}
+  .slack{background:#121622; border:1px solid var(--line); border-radius:14px; padding:20px 22px; font-size:14.5px; line-height:1.55; max-width:640px}
+  .slack .who{font-weight:700; margin-top:14px} .slack .who:first-child{margin-top:0}
+  .slack ul{margin:4px 0 0; padding-left:18px; color:var(--muted)} .slack li{margin:2px 0}
+  .slack .quiet{color:var(--dim); font-style:italic}
+  .slack .team{margin-top:16px; color:var(--accent); font-size:13px; font-family:var(--mono)}
+  .cols{display:grid; grid-template-columns:1fr 1fr; gap:18px}
+  @media (max-width:720px){ .cols{grid-template-columns:1fr} h2{max-width:none} }
+  .points{display:grid; grid-template-columns:1fr 1fr; gap:14px 26px; margin-top:6px}
+  @media (max-width:720px){ .points{grid-template-columns:1fr} }
+  .point{display:flex; gap:12px; align-items:flex-start}
+  .point .n{font-family:var(--mono); color:var(--accent); font-size:13px; padding-top:3px}
+  .point b{font-family:var(--disp); font-weight:600; font-size:18px} .point span{color:var(--muted); font-size:14.5px; line-height:1.5}
+  .modlist{display:grid; grid-template-columns:1fr 1fr; gap:10px 22px; margin-top:4px; max-width:820px}
+  @media (max-width:720px){ .modlist{grid-template-columns:1fr} }
+  .mod{display:flex; gap:12px; align-items:baseline; padding:8px 0; border-bottom:1px solid var(--line)}
+  .mod code{font-family:var(--mono); color:var(--accent); font-size:13.5px; min-width:118px} .mod span{color:var(--muted); font-size:14px}
+  .team{display:flex; gap:22px; flex-wrap:wrap; color:var(--muted); font-size:15px; margin-top:4px} .team b{color:var(--text); font-weight:600}
+  .nav{position:fixed; left:0; right:0; bottom:0; display:flex; align-items:center; gap:16px; padding:14px clamp(20px,5vw,60px); z-index:20}
+  .progress{flex:1; height:2px; background:var(--line); border-radius:2px; overflow:hidden}
+  .progress i{display:block; height:100%; background:var(--accent); width:11%; transition:width .4s ease}
+  .count{font-family:var(--mono); font-size:12px; color:var(--muted); letter-spacing:.1em}
+  .btns{display:flex; gap:8px}
+  .btns button{font-family:var(--mono); font-size:15px; background:var(--panel); color:var(--text); border:1px solid var(--line); border-radius:8px; width:38px; height:32px; cursor:pointer}
+  .btns button:hover{border-color:var(--accent); color:var(--accent)} .btns button:focus-visible{outline:2px solid var(--accent); outline-offset:2px}
+  .hint{position:fixed; top:16px; right:clamp(20px,5vw,60px); font-family:var(--mono); font-size:11px; color:var(--dim); letter-spacing:.08em; z-index:20}
+</style>
+</head>
+<body>
+<div class="hint">← / → to navigate</div>
+<div class="deck" id="deck">
+  <section class="slide active">
+    <div class="eyebrow">Multi-App AI Agent Hackathon</div>
+    <h1>Sprint&nbsp;Copilot</h1>
+    <div class="tag">The scrum master, <span class="accent">automated.</span></div>
+    <p class="lead">An agent that watches your team's GitHub &amp; Jira, moves tickets when work merges, flags what's stuck, and writes the daily standup into Slack — so nobody does the busywork.</p>
+    <div class="row" style="margin-top:6px"><span class="chip">GitHub</span><span class="chip">Jira</span><span class="chip">Slack</span><span class="chip">Azure OpenAI</span></div>
+    <div class="team" style="margin-top:14px"><span><b>Rohith Penninti</b></span><span><b>Shravani Joshi</b></span><span class="meta">penninti/worklog-ai</span></div>
+  </section>
+  <section class="slide">
+    <div class="eyebrow">The problem</div>
+    <h2>Every team pays someone to do the busywork.</h2>
+    <div class="cols" style="margin-top:8px">
+      <div class="card"><div class="ttl" style="margin-bottom:12px">The daily scrum-master grind</div>
+        <ul style="margin:0; padding-left:18px; color:var(--muted); line-height:1.9; font-size:15.5px">
+          <li>Chase everyone: "what did you do yesterday?"</li><li>Move tickets when the code actually merges</li>
+          <li>Write each person's standup, by hand</li><li>Notice what's stuck before it's too late</li>
+          <li>Run the meeting even when there's nothing to say</li></ul></div>
+      <div class="card" style="display:flex; flex-direction:column; justify-content:center; gap:8px">
+        <div style="font-family:var(--disp); font-weight:800; font-size:56px; line-height:1; color:var(--stuck)">~30 min</div>
+        <div class="lead" style="margin:0">per engineer, every day — on coordination no one wants to do, and everyone forgets to.</div></div>
+    </div>
+  </section>
+  <section class="slide">
+    <div class="eyebrow">The idea</div>
+    <h2>It watches the work and does the coordination itself.</h2>
+    <div class="flow">
+      <div class="step">Read<small>GitHub + Jira</small></div><span class="arrow">→</span>
+      <div class="step">Link<small>commit ↔ ticket by key</small></div><span class="arrow">→</span>
+      <div class="step">Act<small>move + comment</small></div><span class="arrow">→</span>
+      <div class="step">Write<small>AI standup</small></div><span class="arrow">→</span>
+      <div class="step">Post<small>to Slack</small></div></div>
+    <p class="lead" style="margin-top:14px">Every step is a <span class="accent">real change in the tools you already use</span>. Developers tag a commit with the ticket key (<span class="mono accent">SCRUM-8</span>); the agent does the rest.</p>
+  </section>
+  <section class="slide">
+    <div class="eyebrow">It acts — not reports</div>
+    <h2>A PR merges. The ticket moves itself.</h2>
+    <div class="card" style="max-width:680px; margin-top:6px">
+      <div class="card-head"><span class="mono accent">SCRUM-8</span><span class="ttl">Read Jira — fetch sprint tickets</span><span class="pill done" style="margin-left:auto">● Done</span></div>
+      <div class="meta">assignee: Rohith Reddy</div>
+      <div class="comment"><span class="u">Sprint Copilot</span> · just now<br>✅ moved to <span class="g">Done</span>.<br>• PR #4: SCRUM-8 read jira — fetch sprint tickets<br>• commit <span class="lnk">03ca272f</span> → <span class="lnk">github.com/penninti/worklog-ai/commit/03ca272f</span></div>
+    </div>
+    <p class="lead" style="margin-top:6px">No one opened Jira. No one dragged a card. The merge triggered it, and it left the commit link as evidence.</p>
+  </section>
+  <section class="slide">
+    <div class="eyebrow">Honest standups</div>
+    <h2>It writes each person's standup — blockers first.</h2>
+    <div class="slack" style="margin-top:6px">
+      <div class="who">Rohith Reddy</div>
+      <ul><li>Built the auto-move + Jira comment and the all-branches GitHub reader</li><li>Added the manual link &amp; status override to the dashboard</li><li>Tickets: <span class="mono">SCRUM-8</span> [Done], <span class="mono">SCRUM-9</span> [In Progress]</li><li>Blockers: none</li></ul>
+      <div class="who">Shravani Joshi</div><ul><li class="quiet">No tracked activity today.</li></ul>
+      <div class="team">Team note: 0 open PRs · SCRUM-1 is at risk — commits but still To Do.</div>
+    </div>
+    <p class="lead" style="margin-top:6px">It says <span class="a">"nothing today"</span> instead of inventing work — an AI you can trust in front of your team.</p>
+  </section>
+  <section class="slide">
+    <div class="eyebrow">Trustworthy by design</div>
+    <h2>Catches what's stuck. Lets a human step in.</h2>
+    <div class="cols" style="margin-top:6px">
+      <div class="card"><div class="card-head"><span class="pill stuck">⚠ At risk</span></div>
+        <div class="ttl" style="font-size:15px; line-height:1.5">SCRUM-1 has commits but is still <span class="a">To Do</span> — move it forward.</div>
+        <p class="lead" style="font-size:14.5px; margin-top:10px">Flags tickets with code but no movement, and PRs left open too long.</p></div>
+      <div class="card"><div class="card-head"><span class="pill todo">Human override</span></div>
+        <div class="ttl" style="font-size:15px; line-height:1.5">Agent missed a link? <span class="accent">One click</span> to link a commit or set a status — from the dashboard.</div>
+        <p class="lead" style="font-size:14.5px; margin-top:10px">Automation proposes; a person can always correct it.</p></div>
+    </div>
+  </section>
+  <section class="slide">
+    <div class="eyebrow">Under the hood</div>
+    <h2>Small, sharp pieces.</h2>
+    <div class="modlist">
+      <div class="mod"><code>github.py</code><span>reads commits &amp; PRs across all branches</span></div>
+      <div class="mod"><code>jira.py</code><span>reads tickets · moves them · comments</span></div>
+      <div class="mod"><code>match.py</code><span>links commit ↔ ticket by key</span></div>
+      <div class="mod"><code>stuck.py</code><span>flags stalled work</span></div>
+      <div class="mod"><code>standup.py</code><span>writes the standup — Azure OpenAI</span></div>
+      <div class="mod"><code>slack.py</code><span>posts to the channel</span></div>
+      <div class="mod"><code>web.py</code><span>the live dashboard + overrides</span></div>
+      <div class="mod"><code>run.py</code><span>the whole flow, one command</span></div>
+    </div>
+    <div class="row" style="margin-top:16px"><span class="chip">Python</span><span class="chip">Flask</span><span class="chip">GitHub / Jira / Slack REST</span><span class="chip">Azure OpenAI</span></div>
+  </section>
+  <section class="slide">
+    <div class="eyebrow">Why it's different</div>
+    <h2>Not another summary bot.</h2>
+    <div class="points" style="margin-top:8px">
+      <div class="point"><span class="n">01</span><div><b>It acts, not reports</b><br><span>Changes Jira and Slack — most "AI" demos only summarize.</span></div></div>
+      <div class="point"><span class="n">02</span><div><b>Honest AI</b><br><span>Says when nothing happened; never invents progress.</span></div></div>
+      <div class="point"><span class="n">03</span><div><b>Human in the loop</b><br><span>One-click override on links and status — built for failure, not just the happy path.</span></div></div>
+      <div class="point"><span class="n">04</span><div><b>Real &amp; live</b><br><span>Running on our actual repo &amp; board. Merge a PR yourself and watch it move.</span></div></div>
+    </div>
+  </section>
+  <section class="slide">
+    <div class="eyebrow">What's next</div>
+    <h2>The scrum master's busywork — gone.</h2>
+    <div class="row" style="margin-top:2px"><span class="chip">Update the Notion sprint page</span><span class="chip">Cancel the standup when there's nothing to say</span><span class="chip">Open follow-up tickets from TODOs</span></div>
+    <div class="tag" style="margin-top:20px">Live demo <span class="accent">→</span></div>
+    <div class="team" style="margin-top:10px"><span><b>Rohith Penninti</b></span><span><b>Shravani Joshi</b></span><span class="meta">Sprint Copilot</span></div>
+  </section>
+</div>
+<div class="nav">
+  <span class="count" id="count">01 / 09</span>
+  <div class="progress"><i id="bar"></i></div>
+  <div class="btns"><button id="prev" aria-label="Previous slide">◀</button><button id="next" aria-label="Next slide">▶</button></div>
+</div>
+<script>
+  const slides=[...document.querySelectorAll('.slide')], bar=document.getElementById('bar'), count=document.getElementById('count');
+  let i=0; const pad=n=>String(n).padStart(2,'0');
+  function show(n){ i=Math.max(0,Math.min(slides.length-1,n)); slides.forEach((s,x)=>s.classList.toggle('active',x===i));
+    bar.style.width=((i+1)/slides.length*100)+'%'; count.textContent=pad(i+1)+' / '+pad(slides.length); }
+  document.getElementById('next').onclick=()=>show(i+1); document.getElementById('prev').onclick=()=>show(i-1);
+  addEventListener('keydown',e=>{ if(['ArrowRight','PageDown',' '].includes(e.key)){e.preventDefault();show(i+1);} if(['ArrowLeft','PageUp'].includes(e.key)){e.preventDefault();show(i-1);} if(e.key==='Home')show(0); if(e.key==='End')show(slides.length-1); });
+  show(0);
+</script>
+</body>
+</html>
